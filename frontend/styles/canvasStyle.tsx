@@ -4,7 +4,7 @@ export const canvasStyle = StyleSheet.create({
   container: {
     height: "85%",
     width: "100%",
-    backgroundColor: "blue",
+    backgroundColor: "black",
     alignItems: "center",
     justifyContent: "center",
   },

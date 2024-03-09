@@ -2,9 +2,10 @@ import { StyleSheet } from "react-native";
 
 export const appStyle = StyleSheet.create({
   container: {
-    flex: 1,
+    width: "100%",
     backgroundColor: "green",
-    alignItems: "center",
-    justifyContent: "space-evenly",
+    display: "flex",
+    flexDirection: "row",
+    
   },
 });

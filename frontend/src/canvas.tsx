@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text } from "react-native";
-import { canvasStyle } from "../styles/canvasStyle";
+import { canvasStyle } from "@styles/canvasStyle";
 
 interface CanvasProps {}
 interface CanvasState {}

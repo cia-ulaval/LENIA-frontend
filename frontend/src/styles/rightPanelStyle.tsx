@@ -1,11 +1,12 @@
-import { StyleSheet } from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
-export const rightBarStyle = StyleSheet.create({
+export const rightPanelStyle = EStyleSheet.create({
     container: {
-        width: "25%",
-        height: "100%",
-        backgroundColor: "brown",
+        marginTop: 60,
+        width: 350,
+        backgroundColor:'$bg_color5',
         alignItems: "center",
+
 
         display: "flex",
         flexDirection: "column",
@@ -15,7 +16,7 @@ export const rightBarStyle = StyleSheet.create({
 
     upper_button_layout: {
         width: "100%",
-        backgroundColor: "red",
+        backgroundColor: "bg_color1",
         padding: 10,
 
         display: "flex",
@@ -24,8 +25,9 @@ export const rightBarStyle = StyleSheet.create({
     },
 
     image_view: {
+        
+
         width: "100%",
-        backgroundColor: "blue",
         padding: 10,
         display: "flex",
         flexDirection: "row",
@@ -33,11 +35,21 @@ export const rightBarStyle = StyleSheet.create({
     },
 
     image:{
+        
+        borderRadius:30,
         flex: 1,
         resizeMode: "contain",
-        backgroundColor: "purple",
+        backgroundColor: "black",
         maxHeight: 300,
 
+    },
+
+    select:{
+        padding:10,
+        borderRadius : 3,
+        backgroundColor:"$bg_color1",
+        color:"white",
+        fontWeight: "bold",
     }
 
    

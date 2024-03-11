@@ -28,6 +28,7 @@ export default class Viewport extends Component<ViewportProps, ViewportState>{
 
 
 const viewportStyle = EStyleSheet.create({
+
     container: {
         aspectRatio: 4/3,
         width: "100%",
@@ -36,4 +37,6 @@ const viewportStyle = EStyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
       }
+
+    
 });

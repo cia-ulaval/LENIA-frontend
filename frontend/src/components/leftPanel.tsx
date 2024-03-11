@@ -23,8 +23,8 @@ export default class LeftPanel extends Component<LeftPanelProps, LeftPanelState>
     render() {
         return (
             <View style={leftPanelStyle.container}>
-                <Viewport></Viewport>
-                <LowerBar></LowerBar>
+                {/* <Viewport></Viewport>
+                <LowerBar></LowerBar> */}
             </View>
         );
     }
@@ -33,14 +33,16 @@ export default class LeftPanel extends Component<LeftPanelProps, LeftPanelState>
 
 const leftPanelStyle = EStyleSheet.create({
     container: {
-        position: "relative",
-        marginTop: 60,
-        marginBottom: 80,
+
+        marginTop: 80,
+        margin: 40,
+        
+        borderRadius: 30,
         flexGrow: 1,
-        backgroundColor: "$bg_white",
-        justifyContent: "center",
-        alignItems: "flex-start",
-        display: "flex",
-        flexDirection: "row",
+        backgroundColor: "$bg_color2",
+        boxShadow: "-10px 10px 10px  ",
+        borderWidth: 1,
+        borderColor: "$bg_color3",
+ 
     },
 });

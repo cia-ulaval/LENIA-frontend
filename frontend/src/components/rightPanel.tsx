@@ -20,7 +20,7 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
     render(){
         return(
             <View style={rightPanelStyle.container}>
-                <View style={rightPanelStyle.upper_button_layout}>
+                {/* <View style={rightPanelStyle.upper_button_layout}>
                     <select style={rightPanelStyle.select}>
                         <option>Channel 1</option>
                         <option>Channel 2</option>
@@ -31,7 +31,7 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
                 </View>
                 <View style={rightPanelStyle.image_view}>
                     <Image source={require("@assets/adaptive-icon.png")} style={rightPanelStyle.image}/>
-                </View>
+                </View> */}
             </View>
         );
     }
@@ -40,43 +40,30 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
 
 const rightPanelStyle = EStyleSheet.create({
     container: {
-        marginTop: 60,
-        width: 350,
-        backgroundColor:'$bg_color5',
-        alignItems: "center",
+        marginTop: 80,
+        margin: 40,
+        height: "40%",
+        maxWidth: 350,
         display: "flex",
-        flexDirection: "column",
-        justifyContent:"flex-start",
-        alignContent: "flex-start",
+        flexDirection: "row",
+        borderRadius: 30,
+        flexGrow: 1,
+        backgroundColor: "$bg_color2",
+        boxShadow: "-10px 10px 10px  ",
+        borderWidth: 1,
+        borderColor: "$bg_color3",
     },
     upper_button_layout: {
-        width: "100%",
-        backgroundColor: "bg_color1",
-        padding: 10,
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
+     
     },
     image_view: {
-        width: "100%",
-        padding: 10,
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center"
+       
     },
     image: {
-        borderRadius:30,
-        flex: 1,
-        resizeMode: "contain",
-        backgroundColor: "black",
-        maxHeight: 300,
+      
 
     },
     select: {
-        padding:10,
-        borderRadius : 3,
-        backgroundColor:"$bg_color1",
-        color:"white",
-        fontWeight: "bold",
+        
     }
 });

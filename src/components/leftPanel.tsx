@@ -10,8 +10,8 @@ import Viewport from "@components/viewport";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 
-interface LeftPanelProps{}
-interface LeftPanelState{}
+interface LeftPanelProps {}
+interface LeftPanelState {}
 
 
 export default class LeftPanel extends Component<LeftPanelProps, LeftPanelState>{

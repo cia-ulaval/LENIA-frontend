@@ -8,8 +8,8 @@ import { View, Text, Button, TextInput } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 
-interface LowerBarProps{}
-interface LowerBarState{}
+interface LowerBarProps {}
+interface LowerBarState {}
 
 
 export default class LowerBar extends Component<LowerBarProps, LowerBarState>{

@@ -7,8 +7,8 @@ import { View, Image } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 
-interface ViewportProps{}
-interface ViewportState{}
+interface ViewportProps {}
+interface ViewportState {}
 
 
 export default class Viewport extends Component<ViewportProps, ViewportState>{

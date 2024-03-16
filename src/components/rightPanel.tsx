@@ -7,8 +7,8 @@ import {View, Button, Image} from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 
-interface RightPanelProps{}
-interface RightPanelState{}
+interface RightPanelProps {}
+interface RightPanelState {}
 
 
 export default class RightPanel extends Component<RightPanelProps, RightPanelState> {

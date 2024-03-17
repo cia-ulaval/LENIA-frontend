@@ -1,10 +1,9 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, useWindowDimensions } from "react-native";
 import TopBar from "./src/components/topBar";
 import RightPanel from "./src/components/rightPanel";
 import LeftPanel from "./src/components/leftPanel";
 import EStyleSheet from "react-native-extended-stylesheet";
-import { StyleSheet } from "react-native-web";
 
 EStyleSheet.build({ 
     $bg_white: '#F7F7F7',
@@ -26,12 +25,25 @@ EStyleSheet.build({
 
 
 export default function App() {
+
+    const windowInfo = useWindowDimensions();
+    const [isWindowWidthSmall, setIsWindowWidthSmall] = useState(false);
+    const WINDOWSMALLSIZE = 780;
+    
+    //Set the isWindowWidthSmall flag
+    useEffect(()=>{
+        if(windowInfo.width <= WINDOWSMALLSIZE)
+            setIsWindowWidthSmall(true);
+        else
+            setIsWindowWidthSmall(false);
+    }, [windowInfo])
+
     return (
         <View style={appStyle.global}>
-            <View style={appStyle.container}>
-                <TopBar></TopBar>
-                <LeftPanel></LeftPanel>
-                <RightPanel></RightPanel>
+            <View style={isWindowWidthSmall ? appStyle.container_small_width : appStyle.container}>
+                <TopBar windowInfo={windowInfo} isWindowWidthSmall={isWindowWidthSmall}></TopBar>
+                <LeftPanel isWindowWidthSmall={isWindowWidthSmall}></LeftPanel>
+                <RightPanel isWindowWidthSmall={isWindowWidthSmall}></RightPanel>
             </View>
         </View>
 
@@ -53,8 +65,16 @@ const appStyle = EStyleSheet.create({
         flexDirection : "row",
         
         flexGrow: 1,
+        minHeight : 400,
         maxWidth: 1600,
         backgroundColor: "$bg_color1",
     },
+
+    container_small_width:{
+        display: "flex",
+        flexDirection : "column",
+        backgroundColor: "$bg_color1",
+        width: "100%",
+    }
     
 });

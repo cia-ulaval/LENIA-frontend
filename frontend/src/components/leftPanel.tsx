@@ -10,7 +10,7 @@ import Viewport from "@components/viewport";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 
-interface LeftPanelProps{}
+interface LeftPanelProps{isWindowWidthSmall:boolean}
 interface LeftPanelState{}
 
 
@@ -22,7 +22,9 @@ export default class LeftPanel extends Component<LeftPanelProps, LeftPanelState>
 
     render() {
         return (
-            <View style={leftPanelStyle.container}>
+            <View style={this.props.isWindowWidthSmall ?
+                                    leftPanelStyle.container_small_width
+                                    : leftPanelStyle.container}>
                 {/* <Viewport></Viewport>
                 <LowerBar></LowerBar> */}
             </View>
@@ -45,4 +47,15 @@ const leftPanelStyle = EStyleSheet.create({
         borderColor: "$bg_color3",
  
     },
+
+    container_small_width:{
+        marginTop: 80,
+        margin: 10,
+        borderRadius: 30,
+        flexGrow: 1,
+        backgroundColor: "$bg_color2",
+        boxShadow: "-10px 10px 10px  ",
+        borderWidth: 1,
+        borderColor: "$bg_color3",
+    }
 });

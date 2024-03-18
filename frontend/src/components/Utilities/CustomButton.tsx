@@ -1,4 +1,8 @@
-
+/**
+ * \file : CustomButton.tsx
+ * \brief : Helper module that creates a custom button with hover animation and can contain 
+ *              icons
+ */
 import { useState,useEffect } from "react";
 import { Pressable,Text } from "react-native";
 import { Icon } from '@rneui/themed'
@@ -6,7 +10,7 @@ import React from "react";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 
-type ButtonProps = { title?: string, icon?: { name: string, type: string, }, onPress:Function, 
+export type ButtonProps = { title?: string, icon?: { name: string, type: string, }, onPress:Function, 
                     isSelected?: boolean}
 const CustomButton = (props: ButtonProps) => {
 
@@ -15,7 +19,15 @@ const CustomButton = (props: ButtonProps) => {
     useEffect(()=>{
         if(props.isSelected)
             setStylePressable(buttonStyle.button_hover);
-    }, [props.isSelected, stylePressable]);
+        else{
+            setStylePressable(buttonStyle.button);
+        }
+    }, [props.isSelected]);
+
+    useEffect(()=>{
+        if(props.isSelected)
+            setStylePressable(buttonStyle.button_hover);
+    }, [stylePressable]);
 
 
     return (

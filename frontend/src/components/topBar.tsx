@@ -4,7 +4,7 @@
  *          general tools of the UI
  */
 import React, { Component, PropsWithChildren, useEffect, useState } from "react";
-import { View, Image, ImageStyle, Animated, ImageSourcePropType, Easing, Text, Pressable, ScaledSize, } from "react-native";
+import { View, Image, ImageStyle, Animated, ImageSourcePropType, Easing, Text, Pressable, ScaledSize, Modal } from "react-native";
 import EStyleSheet, { flatten } from "react-native-extended-stylesheet";
 import { Icon } from '@rneui/themed'
 import CustomButton from "./Utilities/CustomButton";
@@ -23,17 +23,22 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
         this.state = {
             isBarsToggle: false,
         };
-        
+
     }
-    
+
+
+    resetBarsToggle() {
+        this.setState({ isBarsToggle: false });
+    }
+
     componentDidUpdate(prevProps: Readonly<TopBarProps>, prevState: Readonly<TopBarState>, snapshot?: any): void {
-        {/*Reset the toggle when switching to Big Mode*/}
-        if(!this.props.isWindowWidthSmall && this.state.isBarsToggle == true){
-            this.setState({isBarsToggle: false});
+        {/*Reset the toggle when switching to Big Mode*/ }
+        if (!this.props.isWindowWidthSmall && this.state.isBarsToggle == true) {
+            this.resetBarsToggle();
         }
     }
 
-    
+
     render() {
         return (
             <View style={topBarStyle.container}>
@@ -50,15 +55,15 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
 
                 {/*right side of topbar, with conditional rendering for the BIG of SHORT window */}
                 {/*if it is the SHORT window, renders the BARS button for the shorter pop-up menu */}
-                <Pressable style={topBarStyle.button_group_container}>
+                <View style={topBarStyle.button_group_container}>
 
-                    {RenderFunctionnalButtons(this.props.isWindowWidthSmall, this.state.isBarsToggle)}
+                    {RenderFunctionnalButtons(this)}
                     {this.props.isWindowWidthSmall &&
                         <CustomButton isSelected={this.state.isBarsToggle}
-                        icon={{ type: 'font-awesome', name: 'bars' }} 
-                        onPress={()=>{this.setState({isBarsToggle:!this.state.isBarsToggle})}} />
+                            icon={{ type: 'font-awesome', name: 'bars' }}
+                            onPress={() => { this.setState({ isBarsToggle: !this.state.isBarsToggle }) }} />
                     }
-                </Pressable>
+                </View>
 
             </View>
         )
@@ -66,30 +71,59 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
 }
 
 
-{/*Helper functions for the rendering, returns the buttons of the layout */}
-const RenderTopBarButtons = (style:EStyleSheet.AnyObject)=>{
-    return(
-        <View style={style}>
-                <CustomButton  onPress={()=>{}} title="How to use"></CustomButton>
-                <CustomButton onPress={()=>{}} title="About us"></CustomButton>
-                <CustomButton onPress={()=>{}} title="Contact us"></CustomButton>
-            </View>
+{/*Helper functions for the rendering, returns the buttons of the layout */ }
+const RenderTopBarButtons = () => {
+    return (
+        <React.Fragment>
+
+            <CustomButton onPress={() => { }} title="How to use"></CustomButton>
+            <CustomButton onPress={() => { }} title="About us"></CustomButton>
+            <CustomButton onPress={() => { }} title="Contact us"></CustomButton>
+        </React.Fragment>
+
+
     );
 }
 
-{/*Helper functions for the rendering, conditions for the topBar button's rendering */}
-const RenderFunctionnalButtons = (isWindowWidthSmall: boolean, isBarsToggle: boolean) => {
-    if (!isWindowWidthSmall) 
-        return (
-            RenderTopBarButtons(topBarStyle.button_group));
 
-    else if(isBarsToggle)
+{/*Helper functions for the rendering, conditions for the topBar button's rendering */ }
+const RenderFunctionnalButtons = (topBar: TopBar) => {
+    if (!topBar.props.isWindowWidthSmall) {
         return (
-            RenderTopBarButtons(topBarStyle.button_group_small));
+            <View style={topBarStyle.button_group}>
+
+                {RenderTopBarButtons()}
+
+            </View>
+        );
+    }
+    else if (topBar.state.isBarsToggle) {
+        return (
+            <>
+                {/*weird transparent layout shenanigans to create a touchable 
+                    layout to unfocus from dropdown when clicked outside!
+                    Merci John pour l'idee!!*/}
+                <Pressable style={topBarStyle.button_touchable_transparent}
+                        onPress={()=>{topBar.resetBarsToggle();}}>
+                </Pressable>
+
+                {/*renders the buttons*/}
+                <View style={topBarStyle.button_group_small}>
+                    {RenderTopBarButtons()}
+                </View>
+            </>
+
+
+
+        );
+
+    }
+
 }
 
 
-{/*topBar styles*/}
+
+{/*topBar styles*/ }
 const topBarStyle = EStyleSheet.create({
     container: {
         width: "100%",
@@ -115,7 +149,7 @@ const topBarStyle = EStyleSheet.create({
     },
 
 
-    button_group_container:{
+    button_group_container: {
         position: "relative",
         display: "flex",
         flexDirection: "row",
@@ -131,7 +165,7 @@ const topBarStyle = EStyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         gap: 15,
-        
+
     },
 
     button_group_small: {
@@ -151,6 +185,14 @@ const topBarStyle = EStyleSheet.create({
         borderColor: "$bg_color3",
     },
 
+    button_touchable_transparent:{
+        position: "fixed",
+        width: "100%",
+        height : "100%",
+        backgroundColor: "transparent",
+        top:0, left :0,
+        cursor:"default",
+    },
     logo: {
 
         width: '2.5rem',

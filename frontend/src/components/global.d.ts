@@ -7,3 +7,6 @@ declare module '*.png'{
     const value: import('react-native').ImageURISource;
     export default value;
 }
+
+type ButtonProps = { title?: string, icon?: { name: string, type: string, }, onPress:Function, 
+                    isSelected?: boolean}

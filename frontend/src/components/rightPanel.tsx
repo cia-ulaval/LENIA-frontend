@@ -107,7 +107,7 @@ const rightPanelStyle = EStyleSheet.create({
         borderWidth: 1,
         borderColor: "$bg_color3",
 
-        gap : 60,
+        gap : 20,
         justifyContent : "center",
         alignItems : "center",
     },

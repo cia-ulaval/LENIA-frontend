@@ -5,6 +5,7 @@ import RightPanel from "./src/components/rightPanel";
 import LeftPanel from "./src/components/leftPanel";
 import EStyleSheet from "react-native-extended-stylesheet";
 
+{/*constantes pour le styling*/}
 EStyleSheet.build({ 
     $bg_white: '#F7F7F7',
     $bg_black : '#000000',
@@ -20,7 +21,7 @@ EStyleSheet.build({
 
     $fg_color3 : "#ECECEC",
 
-    
+    $MIN_SIZE : 400,
 });
 
 
@@ -65,8 +66,9 @@ const appStyle = EStyleSheet.create({
         flexDirection : "row",
         
         flexGrow: 1,
-        minHeight : 400,
+        minHeight : "$MIN_SIZE",
         maxWidth: 1600,
+  
         backgroundColor: "$bg_color1",
     },
 
@@ -74,6 +76,8 @@ const appStyle = EStyleSheet.create({
         display: "flex",
         flexDirection : "column",
         backgroundColor: "$bg_color1",
+        minWidth: "$MIN_SIZE",
+        minHeight : "$MIN_SIZE",
         width: "100%",
     }
     

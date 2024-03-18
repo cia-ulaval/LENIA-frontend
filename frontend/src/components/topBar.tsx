@@ -1,12 +1,14 @@
 /**
+ * \file : topBar.tsx
  * \brief : React module that encapsulates the top bar containing the 
  *          general tools of the UI
  */
-import React, { Component, PropsWithChildren, useEffect, useRef, useState } from "react";
-import { View, Image, ImageStyle, Animated, ImageSourcePropType, Easing, Text, Pressable, ScaledSize, TouchableHighlightBase, NativeSyntheticEvent, TargetedEvent, TouchableWithoutFeedback } from "react-native";
+import React, { Component, PropsWithChildren, useEffect, useState } from "react";
+import { View, Image, ImageStyle, Animated, ImageSourcePropType, Easing, Text, Pressable, ScaledSize, } from "react-native";
 import EStyleSheet, { flatten } from "react-native-extended-stylesheet";
 import { Icon } from '@rneui/themed'
 import CustomButton from "./Utilities/CustomButton";
+import RotatingImage from "./Utilities/RotatingImage";
 
 
 
@@ -16,8 +18,6 @@ interface TopBarState { isBarsToggle: boolean }
 
 export default class TopBar extends Component<TopBarProps, TopBarState>{
 
-
-
     constructor(public props: TopBarProps) {
         super(props);
         this.state = {
@@ -26,19 +26,19 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
         
     }
     
-
     componentDidUpdate(prevProps: Readonly<TopBarProps>, prevState: Readonly<TopBarState>, snapshot?: any): void {
-        //Reset the toggle when switching to Big Mode
+        {/*Reset the toggle when switching to Big Mode*/}
         if(!this.props.isWindowWidthSmall && this.state.isBarsToggle == true){
             this.setState({isBarsToggle: false});
         }
     }
 
     
-
     render() {
         return (
             <View style={topBarStyle.container}>
+
+                {/*left side of topbar, including the rotating image and the title*/}
                 <View style={topBarStyle.button_group}>
                     <RotatingImage style={topBarStyle.logo} source={require("@assets/lenia-icon.svg")}></RotatingImage>
                     {
@@ -48,6 +48,8 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
                 </View>
 
 
+                {/*right side of topbar, with conditional rendering for the BIG of SHORT window */}
+                {/*if it is the SHORT window, renders the BARS button for the shorter pop-up menu */}
                 <Pressable style={topBarStyle.button_group_container}>
 
                     {RenderFunctionnalButtons(this.props.isWindowWidthSmall, this.state.isBarsToggle)}
@@ -56,12 +58,15 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
                         icon={{ type: 'font-awesome', name: 'bars' }} 
                         onPress={()=>{this.setState({isBarsToggle:!this.state.isBarsToggle})}} />
                     }
-
                 </Pressable>
+
             </View>
         )
     }
 }
+
+
+{/*Helper functions for the rendering, returns the buttons of the layout */}
 const RenderTopBarButtons = (style:EStyleSheet.AnyObject)=>{
     return(
         <View style={style}>
@@ -71,57 +76,20 @@ const RenderTopBarButtons = (style:EStyleSheet.AnyObject)=>{
             </View>
     );
 }
+
+{/*Helper functions for the rendering, conditions for the topBar button's rendering */}
 const RenderFunctionnalButtons = (isWindowWidthSmall: boolean, isBarsToggle: boolean) => {
-    if (!isWindowWidthSmall) {
+    if (!isWindowWidthSmall) 
         return (
-            RenderTopBarButtons(topBarStyle.button_group)
-        );
-    }
-    else if(isBarsToggle){
+            RenderTopBarButtons(topBarStyle.button_group));
+
+    else if(isBarsToggle)
         return (
-            RenderTopBarButtons(topBarStyle.button_group_small)
-        );
-    }
+            RenderTopBarButtons(topBarStyle.button_group_small));
 }
 
 
-type RotatingImageProps = PropsWithChildren<{ style: ImageStyle, source: ImageSourcePropType }>;
-const RotatingImage = (props: RotatingImageProps) => {
-
-    const [spinValue, setSpinValue] = useState(new Animated.Value(0));
-
-    useEffect(() => {
-        Animated.timing(spinValue, {
-            toValue: 1,
-            duration: 30000,
-            easing: Easing.linear,
-            useNativeDriver: true,
-        }).start(
-            () => { setSpinValue(new Animated.Value(0)) }
-        );
-
-    }, [spinValue]);
-
-    const spin = spinValue.interpolate({
-        inputRange: [0, 1],
-        outputRange: ['0deg', '360deg'],
-    });
-
-
-    return (
-        <Animated.Image
-            style={{
-                ...props.style,
-                transform: [{ rotate: spin }],
-            }} source={props.source}>
-        </Animated.Image>
-    );
-
-}
-
-
-
-
+{/*topBar styles*/}
 const topBarStyle = EStyleSheet.create({
     container: {
         width: "100%",

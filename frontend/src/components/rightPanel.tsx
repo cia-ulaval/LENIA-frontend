@@ -1,6 +1,7 @@
 /**
+ * \file : rightPanel.tsx
  * \brief : React module that encapsulates the right toolbar of the UI
- *          Contains the image import buttons and the filter view
+ *          Contains the image import buttons and the filter view, 
  */
 import React, { Component, FormEvent } from "react";
 import { View, Button, Image, ScaledSize } from "react-native";
@@ -16,20 +17,25 @@ interface RightPanelState { imageProp: any, channel: number}
 
 
 export default class RightPanel extends Component<RightPanelProps, RightPanelState>  {
+    
     constructor(public props: RightPanelProps) {
         super(props);
-
-
+        
+        {/*imageProp     : contains 4 spaces for the 3 channels and the initial state  */}
+        {/*channel       : current index of the channel picker */}
         this.state = {imageProp:[,,,], channel: 0};
     }
 
+    /*loads the channel images*/
     async componentDidMount(){
+        //OUCH
         //Load l'image par defaut - ce n'est pas un path relatif ouch - react-native est bizarre
         let asset = await Asset.fromModule('../../assets/icon.png');
         const uri = asset.uri;
         this.setState({imageProp:[uri, uri, uri, uri]});
     }   
 
+    /*helper function during the file picking : sets the current channel with the new image*/
     async selectDocument() {
 
         const result = await DocumentPicker.getDocumentAsync(
@@ -40,10 +46,9 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
             oldImage[this.state.channel] = result.assets[0].uri;
             this.setState({imageProp: oldImage});
         }
-
-
     }
 
+    /*change the state of the channel*/
     OnChange(e:FormEvent<HTMLSelectElement>){
         this.setState({channel: e.currentTarget.selectedIndex});
     }
@@ -71,8 +76,6 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
         );
     }
 }
-
-
 
 const rightPanelStyle = EStyleSheet.create({
     container: {

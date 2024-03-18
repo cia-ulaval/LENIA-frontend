@@ -1,12 +1,11 @@
 /**
+ * \file : leftPanel.tsx
  * \brief : React module that encapsulates the left side of the UI 
  *          containing the canvas and some button functionnalities
  */
 import React from "react";
 import { Component } from "react";
 import { View } from "react-native";
-import LowerBar from "@components/lowerBar";
-import Viewport from "@components/viewport";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 
@@ -25,8 +24,7 @@ export default class LeftPanel extends Component<LeftPanelProps, LeftPanelState>
             <View style={this.props.isWindowWidthSmall ?
                                     leftPanelStyle.container_small_width
                                     : leftPanelStyle.container}>
-                {/* <Viewport></Viewport>
-                <LowerBar></LowerBar> */}
+                
             </View>
         );
     }

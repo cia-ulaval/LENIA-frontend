@@ -15,7 +15,6 @@ const RotatingImage = (props: RotatingImageProps) => {
     const [spinValue, setSpinValue] = useState(new Animated.Value(0));
     const DELTA = 30000;
 
-    {/*starts the animation*/}
     useEffect(() => {
         Animated.timing(spinValue, {
             toValue: 1,
@@ -28,7 +27,6 @@ const RotatingImage = (props: RotatingImageProps) => {
 
     }, [spinValue]);
 
-    {/*interpolation of the value for the spin*/}
     const spin = spinValue.interpolate({
         inputRange: [0, 1],
         outputRange: ['0deg', '360deg'],

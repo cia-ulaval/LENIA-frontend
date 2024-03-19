@@ -22,16 +22,11 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
     constructor(public props: RightPanelProps) {
         
         super(props);
-        
-        {/*imageProp     : contains 4 spaces for the 3 channels and the initial state  */}
-        {/*channel       : current index of the channel picker */}
         this.state = {imageProp:[,,,], channel: 0};
     }
 
     async componentDidMount(){
         
-        //OUCH
-        //Load l'image par defaut - ce n'est pas un path relatif ouch - react-native est bizarre
         let asset = await Asset.fromModule('../../assets/icon.png');
         const uri = asset.uri;
         this.setState({imageProp:[uri, uri, uri, uri]});

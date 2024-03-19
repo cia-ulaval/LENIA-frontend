@@ -32,7 +32,6 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
 
     componentDidUpdate(prevProps: Readonly<TopBarProps>, prevState: Readonly<TopBarState>, snapshot?: any): void {
         
-        {/*Reset the toggle when switching to Big Mode*/ }
         if (!this.props.isWindowWidthSmall && this.state.isBarsToggle == true) {
             this.resetBarsToggle();
         }
@@ -42,8 +41,6 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
         
         return (
             <View style={topBarStyle.container}>
-
-                {/*left side of topbar, including the rotating image and the title*/}
                 <View style={topBarStyle.button_group}>
                     <RotatingImage style={topBarStyle.logo} source={require("@assets/lenia-icon.svg")}></RotatingImage>
                     {
@@ -52,8 +49,6 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
                     }
                 </View>
 
-                {/*right side of topbar, with conditional rendering for the BIG of SHORT window */}
-                {/*if it is the SHORT window, renders the BARS button for the shorter pop-up menu */}
                 <View style={topBarStyle.button_group_container}>
 
                     {RenderFunctionnalButtons(this)}
@@ -69,7 +64,6 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
 }
 
 
-{/*Helper functions for the rendering, returns the buttons of the layout */ }
 const RenderTopBarButtons = () => {
 
     return (
@@ -82,7 +76,6 @@ const RenderTopBarButtons = () => {
 }
 
 
-{/*Helper functions for the rendering, conditions for the topBar button's rendering */ }
 const RenderFunctionnalButtons = (topBar: TopBar) => {
     
     if (!topBar.props.isWindowWidthSmall) {
@@ -98,12 +91,10 @@ const RenderFunctionnalButtons = (topBar: TopBar) => {
 
         return (
             <>
-                {/*transparent layout for touchable interaction*/}
                 <Pressable style={topBarStyle.button_touchable_transparent}
                         onPress={()=>{topBar.resetBarsToggle();}}>
                 </Pressable>
 
-                {/*renders the buttons*/}
                 <View style={topBarStyle.button_group_small}>
                     {RenderTopBarButtons()}
                 </View>
@@ -113,7 +104,6 @@ const RenderFunctionnalButtons = (topBar: TopBar) => {
 }
 
 
-{/*topBar styles*/ }
 const topBarStyle = EStyleSheet.create({
     container: {
         width: "100%",

@@ -3,6 +3,8 @@
  * \brief : Helper module that creates a custom button with hover animation and can contain 
  *              icons
  */
+
+
 import { useState,useEffect } from "react";
 import { Pressable,Text } from "react-native";
 import { Icon } from '@rneui/themed'
@@ -29,7 +31,6 @@ const CustomButton = (props: ButtonProps) => {
             setStylePressable(buttonStyle.button_hover);
     }, [stylePressable]);
 
-
     return (
         <Pressable style={stylePressable} 
         onHoverIn={() => { setStylePressable(buttonStyle.button_hover) }} 
@@ -43,6 +44,7 @@ const CustomButton = (props: ButtonProps) => {
         </Pressable>
     );
 }
+
 
 const buttonStyle = EStyleSheet.create({
     button: {

@@ -57,3 +57,4 @@ const leftPanelStyle = EStyleSheet.create({
         borderColor: "$bg_color3",
     }
 });
+

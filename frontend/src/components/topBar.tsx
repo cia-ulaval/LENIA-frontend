@@ -3,13 +3,13 @@
  * \brief : React module that encapsulates the top bar containing the 
  *          general tools of the UI
  */
-import React, { Component, PropsWithChildren, useEffect, useState } from "react";
-import { View, Image, ImageStyle, Animated, ImageSourcePropType, Easing, Text, Pressable, ScaledSize, Modal } from "react-native";
+
+
+import React, { Component} from "react";
+import { View, Image, Pressable, ScaledSize } from "react-native";
 import EStyleSheet, { flatten } from "react-native-extended-stylesheet";
-import { Icon } from '@rneui/themed'
 import CustomButton from "./Utilities/CustomButton";
 import RotatingImage from "./Utilities/RotatingImage";
-
 
 
 interface TopBarProps { windowInfo: ScaledSize, isWindowWidthSmall: boolean }
@@ -19,27 +19,27 @@ interface TopBarState { isBarsToggle: boolean }
 export default class TopBar extends Component<TopBarProps, TopBarState>{
 
     constructor(public props: TopBarProps) {
+        
         super(props);
         this.state = {
             isBarsToggle: false,
         };
-
     }
-
 
     resetBarsToggle() {
         this.setState({ isBarsToggle: false });
     }
 
     componentDidUpdate(prevProps: Readonly<TopBarProps>, prevState: Readonly<TopBarState>, snapshot?: any): void {
+        
         {/*Reset the toggle when switching to Big Mode*/ }
         if (!this.props.isWindowWidthSmall && this.state.isBarsToggle == true) {
             this.resetBarsToggle();
         }
     }
 
-
     render() {
+        
         return (
             <View style={topBarStyle.container}>
 
@@ -52,7 +52,6 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
                     }
                 </View>
 
-
                 {/*right side of topbar, with conditional rendering for the BIG of SHORT window */}
                 {/*if it is the SHORT window, renders the BARS button for the shorter pop-up menu */}
                 <View style={topBarStyle.button_group_container}>
@@ -64,7 +63,6 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
                             onPress={() => { this.setState({ isBarsToggle: !this.state.isBarsToggle }) }} />
                     }
                 </View>
-
             </View>
         )
     }
@@ -73,36 +71,34 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
 
 {/*Helper functions for the rendering, returns the buttons of the layout */ }
 const RenderTopBarButtons = () => {
+
     return (
         <React.Fragment>
-
             <CustomButton onPress={() => { }} title="How to use"></CustomButton>
             <CustomButton onPress={() => { }} title="About us"></CustomButton>
             <CustomButton onPress={() => { }} title="Contact us"></CustomButton>
         </React.Fragment>
-
-
     );
 }
 
 
 {/*Helper functions for the rendering, conditions for the topBar button's rendering */ }
 const RenderFunctionnalButtons = (topBar: TopBar) => {
+    
     if (!topBar.props.isWindowWidthSmall) {
+
         return (
             <View style={topBarStyle.button_group}>
-
                 {RenderTopBarButtons()}
-
             </View>
         );
     }
+
     else if (topBar.state.isBarsToggle) {
+
         return (
             <>
-                {/*weird transparent layout shenanigans to create a touchable 
-                    layout to unfocus from dropdown when clicked outside!
-                    Merci John pour l'idee!!*/}
+                {/*transparent layout for touchable interaction*/}
                 <Pressable style={topBarStyle.button_touchable_transparent}
                         onPress={()=>{topBar.resetBarsToggle();}}>
                 </Pressable>
@@ -112,15 +108,9 @@ const RenderFunctionnalButtons = (topBar: TopBar) => {
                     {RenderTopBarButtons()}
                 </View>
             </>
-
-
-
         );
-
     }
-
 }
-
 
 
 {/*topBar styles*/ }
@@ -130,7 +120,6 @@ const topBarStyle = EStyleSheet.create({
         position: "absolute",
         height: 60,
         zIndex: 1,
-
 
         paddingLeft: 30,
         paddingRight: 30,
@@ -147,7 +136,6 @@ const topBarStyle = EStyleSheet.create({
         borderBottomColor: "$bg_color3",
         userSelect: "none",
     },
-
 
     button_group_container: {
         position: "relative",

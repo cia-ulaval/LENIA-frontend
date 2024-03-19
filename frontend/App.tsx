@@ -5,6 +5,7 @@ import RightPanel from "./src/components/rightPanel";
 import LeftPanel from "./src/components/leftPanel";
 import EStyleSheet from "react-native-extended-stylesheet";
 
+
 {/*constantes pour le styling*/}
 EStyleSheet.build({ 
     $bg_white: '#F7F7F7',
@@ -31,7 +32,6 @@ export default function App() {
     const [isWindowWidthSmall, setIsWindowWidthSmall] = useState(false);
     const WINDOWSMALLSIZE = 780;
     
-    //Set the isWindowWidthSmall flag
     useEffect(()=>{
         if(windowInfo.width <= WINDOWSMALLSIZE)
             setIsWindowWidthSmall(true);
@@ -47,9 +47,9 @@ export default function App() {
                 <RightPanel isWindowWidthSmall={isWindowWidthSmall}></RightPanel>
             </View>
         </View>
-
     );
 }
+
 
 const appStyle = EStyleSheet.create({
 
@@ -59,8 +59,8 @@ const appStyle = EStyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         backgroundColor: "$bg_black",
-
     },
+    
     container: {
         display: "flex",
         flexDirection : "row",

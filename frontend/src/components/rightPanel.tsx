@@ -3,12 +3,13 @@
  * \brief : React module that encapsulates the right toolbar of the UI
  *          Contains the image import buttons and the filter view, 
  */
+
+
 import React, { Component, FormEvent } from "react";
-import { View, Button, Image, ScaledSize } from "react-native";
+import { View, Image} from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
 import CustomButton from "./Utilities/CustomButton";
 import * as DocumentPicker from 'expo-document-picker';
-import { ImageProps } from "@rneui/base";
 import {Asset} from 'expo-asset';
 
 
@@ -19,6 +20,7 @@ interface RightPanelState { imageProp: any, channel: number}
 export default class RightPanel extends Component<RightPanelProps, RightPanelState>  {
     
     constructor(public props: RightPanelProps) {
+        
         super(props);
         
         {/*imageProp     : contains 4 spaces for the 3 channels and the initial state  */}
@@ -26,8 +28,8 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
         this.state = {imageProp:[,,,], channel: 0};
     }
 
-    /*loads the channel images*/
     async componentDidMount(){
+        
         //OUCH
         //Load l'image par defaut - ce n'est pas un path relatif ouch - react-native est bizarre
         let asset = await Asset.fromModule('../../assets/icon.png');
@@ -35,8 +37,7 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
         this.setState({imageProp:[uri, uri, uri, uri]});
     }   
 
-    /*helper function during the file picking : sets the current channel with the new image*/
-    async selectDocument() {
+    async pickCurrentChannelNewImage() {
 
         const result = await DocumentPicker.getDocumentAsync(
             { type: 'image/*' }
@@ -48,34 +49,33 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
         }
     }
 
-    /*change the state of the channel*/
-    OnChange(e:FormEvent<HTMLSelectElement>){
+    OnChangeChannelState(e:FormEvent<HTMLSelectElement>){
         this.setState({channel: e.currentTarget.selectedIndex});
     }
 
     render() {
         return (
             <View style={this.props.isWindowWidthSmall ? rightPanelStyle.container_small_width
-                :                                   rightPanelStyle.container}>
+                                                                    : rightPanelStyle.container}>
                 <View style={this.props.isWindowWidthSmall ? rightPanelStyle.upper_button_layout_small_width :
                                                         rightPanelStyle.upper_button_layout}>
-                    <select onChange={(e:FormEvent<HTMLSelectElement>)=>{this.OnChange(e)}} style={rightPanelStyle.select} >
+                    <select onChange={(e:FormEvent<HTMLSelectElement>)=>{this.OnChangeChannelState(e)}} style={rightPanelStyle.select} >
                         <option >Channel 1</option>
                         <option>Channel 2</option>
                         <option>Channel 3</option>
                         <option>Initial state</option>
                     </select>
-                    <CustomButton title="Import image..." onPress={() => { this.selectDocument() }}></CustomButton>
+                    <CustomButton title="Import image..." onPress={() => { this.pickCurrentChannelNewImage() }}></CustomButton>
                 </View>
 
                 <View style={rightPanelStyle.image_view}>
                     <Image resizeMode="contain" source={{uri: this.state.imageProp[this.state.channel]}} style={rightPanelStyle.image} />
                 </View>
-
             </View>
         );
     }
 }
+
 
 const rightPanelStyle = EStyleSheet.create({
     container: {
@@ -111,6 +111,7 @@ const rightPanelStyle = EStyleSheet.create({
         justifyContent : "center",
         alignItems : "center",
     },
+
     upper_button_layout: {
 
         display: "flex",
@@ -119,12 +120,14 @@ const rightPanelStyle = EStyleSheet.create({
 
         borderColor: "$bg_color3",
     },
+
     upper_button_layout_small_width:{
         display: "flex",
         flexDirection : "column",
         justifyContent: "center",
         gap: 50,
     },
+    
     image_view: {
         height : 150,
         minWidth : 200,
@@ -132,12 +135,13 @@ const rightPanelStyle = EStyleSheet.create({
         flexGrow: 1,
         flexDirection : "row",
         alignItems: "flex-start",
-        
     },
+
     image: {
         width: "100%",
         height : "100%",
     },
+    
     select: {
         backgroundColor: "$fg_color1",
         padding: 7,

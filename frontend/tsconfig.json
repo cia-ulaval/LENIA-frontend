@@ -9,7 +9,8 @@
             "@components/*": ["src/components/*"],
             "@src/*": ["src/*"],
             "@assets/*": ["assets/*"]
-        }
+        },
+        
     },
-    "include":["src"]
+    "include":["src"],
 }

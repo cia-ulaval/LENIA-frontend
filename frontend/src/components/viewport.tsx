@@ -1,6 +1,9 @@
 /**
+ * \file : viewport.tsx
  * \brief : React module that shows the simulation. 
  */
+
+
 import React from "react";
 import { Component } from "react";
 import { View, Image } from "react-native";
@@ -12,6 +15,7 @@ interface ViewportState{}
 
 
 export default class Viewport extends Component<ViewportProps, ViewportState>{
+
     constructor(public props: ViewportProps) {
         super(props);
         this.state = {};
@@ -28,6 +32,7 @@ export default class Viewport extends Component<ViewportProps, ViewportState>{
 
 
 const viewportStyle = EStyleSheet.create({
+
     container: {
         aspectRatio: 4/3,
         width: "100%",

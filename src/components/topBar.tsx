@@ -7,23 +7,33 @@
 
 import React, { Component} from "react";
 import { View, Image, Pressable, ScaledSize } from "react-native";
-import EStyleSheet, { flatten } from "react-native-extended-stylesheet";
 import CustomButton from "./Utilities/CustomButton";
 import RotatingImage from "./Utilities/RotatingImage";
+import SettingsModal from "./settingsModal";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 
-interface TopBarProps { windowInfo: ScaledSize, isWindowWidthSmall: boolean }
-interface TopBarState { isBarsToggle: boolean }
+interface TopBarProps {
+    windowInfo: ScaledSize;
+    isWindowWidthSmall: boolean;
+}
+interface TopBarState {
+    isBarsToggle: boolean;
+    isSettingsModalVisible: boolean;
+}
 
 
 export default class TopBar extends Component<TopBarProps, TopBarState>{
-
     constructor(public props: TopBarProps) {
-        
         super(props);
         this.state = {
             isBarsToggle: false,
+            isSettingsModalVisible: false,
         };
+    }
+
+    toggleSettingsModal() {
+        this.setState(prevState => ({ isSettingsModalVisible: !prevState.isSettingsModalVisible }));
     }
 
     resetBarsToggle() {
@@ -31,14 +41,12 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
     }
 
     componentDidUpdate(prevProps: Readonly<TopBarProps>, prevState: Readonly<TopBarState>, snapshot?: any): void {
-        
         if (!this.props.isWindowWidthSmall && this.state.isBarsToggle == true) {
             this.resetBarsToggle();
         }
     }
 
     render() {
-        
         return (
             <View style={topBarStyle.container}>
                 <View style={topBarStyle.button_group}>
@@ -48,7 +56,6 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
                         <Image source={require("@assets/lenia-title.svg")} style={topBarStyle.title}></Image>
                     }
                 </View>
-
                 <View style={topBarStyle.button_group_container}>
 
                     {RenderFunctionnalButtons(this)}
@@ -58,45 +65,44 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
                             onPress={() => { this.setState({ isBarsToggle: !this.state.isBarsToggle }) }} />
                     }
                 </View>
+                <SettingsModal
+                    isVisible={this.state.isSettingsModalVisible}
+                    onClose={() => this.toggleSettingsModal()}
+                />
             </View>
         )
     }
 }
 
 
-const RenderTopBarButtons = () => {
-
+const RenderTopBarButtons = (topBar: TopBar) => {
     return (
         <React.Fragment>
             <CustomButton onPress={() => { }} title="How to use"></CustomButton>
             <CustomButton onPress={() => { }} title="About us"></CustomButton>
             <CustomButton onPress={() => { }} title="Contact us"></CustomButton>
+            <CustomButton onPress={() => topBar.toggleSettingsModal()} title="Settings"></CustomButton>
         </React.Fragment>
     );
 }
 
 
 const RenderFunctionnalButtons = (topBar: TopBar) => {
-    
     if (!topBar.props.isWindowWidthSmall) {
-
         return (
             <View style={topBarStyle.button_group}>
-                {RenderTopBarButtons()}
+                {RenderTopBarButtons(topBar)}
             </View>
         );
     }
-
     else if (topBar.state.isBarsToggle) {
-
         return (
             <>
                 <Pressable style={topBarStyle.button_touchable_transparent}
                         onPress={()=>{topBar.resetBarsToggle();}}>
                 </Pressable>
-
                 <View style={topBarStyle.button_group_small}>
-                    {RenderTopBarButtons()}
+                    {RenderTopBarButtons(topBar)}
                 </View>
             </>
         );
@@ -110,23 +116,18 @@ const topBarStyle = EStyleSheet.create({
         position: "absolute",
         height: 60,
         zIndex: 1,
-
         paddingLeft: 30,
         paddingRight: 30,
         backgroundColor: "$bg_color2",
-
         display: "flex",
         flexDirection: "row",
         gap: 10,
         justifyContent: "space-between",
         alignItems: "center",
-
-
         borderBottomWidth: 1,
         borderBottomColor: "$bg_color3",
         userSelect: "none",
     },
-
     button_group_container: {
         position: "relative",
         display: "flex",
@@ -136,16 +137,13 @@ const topBarStyle = EStyleSheet.create({
         cursor: "default",
         zIndex: 3,
     },
-
     button_group: {
         position: "relative",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         gap: 15,
-
     },
-
     button_group_small: {
         padding: 10,
         width: 130,
@@ -176,10 +174,8 @@ const topBarStyle = EStyleSheet.create({
         width: '2.5rem',
         height: '2.5rem',
     },
-
     title: {
         marginLeft: -20,
         transform: "scale(0.8)"
     },
-
 });

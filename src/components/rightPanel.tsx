@@ -65,7 +65,7 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
                         <option>Channel 3</option>
                         <option>Initial state</option>
                     </select>
-                    <CustomButton title="Import image..." onPress={() => { this.pickCurrentChannelNewImage() }}></CustomButton>
+                    <CustomButton title={{text:"Import image..."}} onPress={() => { this.pickCurrentChannelNewImage() }}></CustomButton>
                 </View>
 
                 <View style={rightPanelStyle.image_view}>

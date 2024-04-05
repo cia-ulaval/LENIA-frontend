@@ -16,6 +16,8 @@ export type ButtonProps = {
     title?: { text: string, style?: EStyleSheet.AnyObject }, icon?: { name: string, type: string, color?: string }, onPress: Function, isDisabled?: boolean,
     isSelected?: boolean, styles?: { idle: EStyleSheet.AnyObject, hover: EStyleSheet.AnyObject, disabled: EStyleSheet.AnyObject }
 }
+
+
 const CustomButton = (props: ButtonProps) => {
 
     const [stylePressable, setStylePressable] = useState(buttonStyle.button);
@@ -35,28 +37,27 @@ const CustomButton = (props: ButtonProps) => {
     }, [props.isSelected]);
 
     useEffect(() => {
-        
+
         if (props.isDisabled) {
             setStyle(style.disabled);
         }
-        else{
+        else {
             setStyle(style.idle);
         }
     }, [props.isDisabled])
 
     useEffect(() => {
-        
+
         if (props.isSelected)
             setStyle(style.hover);
 
-        if (props.isDisabled){
+        if (props.isDisabled) {
             setStyle(style.disabled);
         }
     }, [stylePressable]);
 
-
     function setStyle(newStyle: style) {
-        
+
         if (!props.isDisabled) {
             if (props.styles) {
                 if (newStyle == style.idle) { setStylePressable(props.styles.idle) }
@@ -75,22 +76,19 @@ const CustomButton = (props: ButtonProps) => {
                 setStylePressable(buttonStyle.button_disabled);
             }
         }
-        
-
     }
-    
+
     return (
         <Pressable style={stylePressable} disabled={props.isDisabled}
-            onHoverIn={()=>{setStyle(style.hover)}}
-            onHoverOut={()=>{setStyle(style.idle)}}
-            onPress={() => { props.onPress() }}>
-
+            onHoverIn={() => { setStyle(style.hover) }}
+            onHoverOut={() => { setStyle(style.idle) }}
+            onPress={() => { props.onPress() }}
+        >
             {props.title && <Text style={props.title.style ? props.title.style : buttonStyle.button_text}>{props.title.text}</Text>}
-
             {props.icon && <Icon style={props.isDisabled ? buttonStyle.button_icon_disabled : buttonStyle.button_icon}
                 name={props.icon.name} type={props.icon.type}
-                solid={true} color={props.icon.color ? props.icon.color : "white"} />}
-
+                solid={true} color={props.icon.color ? props.icon.color : "white"}
+            />}
         </Pressable>
     );
 }
@@ -135,7 +133,6 @@ const buttonStyle = EStyleSheet.create({
         color: "$fg_color1",
         userSelect: "none",
     }
-
 });
 
 export default CustomButton;

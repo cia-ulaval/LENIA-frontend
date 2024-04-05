@@ -22,7 +22,6 @@ interface RightPanelState { imageProp: any, channel: number}
 export default class RightPanel extends Component<RightPanelProps, RightPanelState>  {
     
     constructor(public props: RightPanelProps) {
-        
         super(props);
         this.state = {imageProp:[,,,], channel: 0};
         fetchData();
@@ -48,7 +47,6 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
     }
     //il faudrait ici creer ici une fonction avec axios pour envoyer l'image vers le backend
 
-
     OnChangeChannelState(e:FormEvent<HTMLSelectElement>){
         this.setState({channel: e.currentTarget.selectedIndex});
     }
@@ -65,7 +63,7 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
                         <option>Channel 3</option>
                         <option>Initial state</option>
                     </select>
-                    <CustomButton title={{text:"Import image..."}} onPress={() => { this.pickCurrentChannelNewImage() }}></CustomButton>
+                    <CustomButton title={{text:"Import image..."}} onPress={() => { this.pickCurrentChannelNewImage() }}/>
                 </View>
 
                 <View style={rightPanelStyle.image_view}>

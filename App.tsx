@@ -6,7 +6,6 @@ import LeftPanel from "./src/components/leftPanel";
 import EStyleSheet from "react-native-extended-stylesheet";
 
 
-
 EStyleSheet.build({ 
     $bg_white: '#F7F7F7',
     $bg_black: '#000000',

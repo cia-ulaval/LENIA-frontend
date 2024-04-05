@@ -1,6 +1,6 @@
 /**
  * \file : viewport.tsx
- * \brief : React module that shows the simulation. 
+ * \brief : React module that shows the simulation and contains the tools to control it. 
  */
 
 
@@ -41,33 +41,26 @@ export default function Viewport(props: ViewportProps) {
         <View style={viewportStyle.container}>
             <View></View>
             <View style={viewportStyle.button_bar}>
-
                 <View></View>
-
                 <View style={viewportStyle.flex_row}>
                     <CustomButton onPress={() => { togglePlay() }} icon={{ type: "font-awesome", name: (playState == viewportStates.paused ? "pause" : "play") }}
                         styles={{
                             idle: viewportStyle.play_button_idle, hover: viewportStyle.play_button_hover,
                             disabled: viewportStyle.button_disabled
-                        }}></CustomButton>
-
+                        }}/>
                     <CustomButton onPress={() => { pressStop() }} icon={{ type: "font-awesome", name: "stop" }} isDisabled={playState == viewportStates.stopped}
                         styles={{
                             idle: viewportStyle.stop_button_idle, hover: viewportStyle.stop_button_hover,
                             disabled: viewportStyle.button_disabled
-                        }}></CustomButton>
+                        }}/>
                 </View>
-
                 <View style={viewportStyle.flex_row}>
-                    <Icon type="antdesign" name="hourglass" style={viewportStyle.hourglass_icon} color={"white"} size={30}></Icon>
-                    <TextInput style={viewportStyle.text_input}  defaultValue="0.1" maxLength={4}></TextInput>
-                    
+                    <Icon type="antdesign" name="hourglass" style={viewportStyle.hourglass_icon} color={"white"} size={30}/>
+                    <TextInput style={viewportStyle.text_input}  defaultValue="0.1" maxLength={4}/>
                 </View>
-
             </View>
         </View>
     );
-
 }
 
 
@@ -92,7 +85,6 @@ const viewportStyle = EStyleSheet.create({
     },
 
     hourglass_icon:{
-        
     },
 
     button_bar: {
@@ -160,6 +152,4 @@ const viewportStyle = EStyleSheet.create({
         borderRadius: 25,
         cursor: "default",
     }
-
-
 });

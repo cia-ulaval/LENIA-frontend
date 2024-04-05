@@ -78,10 +78,10 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
 const RenderTopBarButtons = (topBar: TopBar) => {
     return (
         <React.Fragment>
-            <CustomButton onPress={() => { }} title="How to use"></CustomButton>
-            <CustomButton onPress={() => { }} title="About us"></CustomButton>
-            <CustomButton onPress={() => { }} title="Contact us"></CustomButton>
-            <CustomButton onPress={() => topBar.toggleSettingsModal()} title="Settings"></CustomButton>
+            <CustomButton onPress={() => { }} title={{text:"How to use"}}></CustomButton>
+            <CustomButton onPress={() => { }} title={{text:"About us"}}></CustomButton>
+            <CustomButton onPress={() => { }} title={{text:"Contact us"}}></CustomButton>
+            <CustomButton onPress={() => topBar.toggleSettingsModal()} title={{text:"Settings"}}></CustomButton>
         </React.Fragment>
     );
 }

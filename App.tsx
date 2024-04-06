@@ -66,8 +66,8 @@ export default function App() {
             <TopBar windowInfo={windowInfo} isWindowWidthSmall={isWindowWidthSmall} setCurrentAppState={setCurrentAppState}/>
                 {currentAppState==appState.MainPage && mainPage()}
                 {currentAppState==appState.HowToUse && <HowToUse isWindowWidthSmall={isWindowWidthSmall}/>}
-                {currentAppState==appState.AboutUs && <AboutUs/>}
-                {currentAppState==appState.ContactUs && <ContactUs/>}
+                {currentAppState==appState.AboutUs && <AboutUs isWindowWidthSmall={isWindowWidthSmall}/>}
+                {currentAppState==appState.ContactUs && <ContactUs isWindowWidthSmall={isWindowWidthSmall}/>}
             </View>
         </View>
     );

@@ -11,11 +11,13 @@ import CustomButton from "./Utilities/CustomButton";
 import RotatingImage from "./Utilities/RotatingImage";
 import SettingsModal from "./settingsModal";
 import EStyleSheet from "react-native-extended-stylesheet";
+import { appState } from "./Utilities/enumList";
 
 
 interface TopBarProps {
     windowInfo: ScaledSize;
     isWindowWidthSmall: boolean;
+    setCurrentAppState: Function;
 }
 interface TopBarState {
     isBarsToggle: boolean;
@@ -49,13 +51,13 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
     render() {
         return (
             <View style={topBarStyle.container}>
-                <View style={topBarStyle.button_group}>
+                <Pressable style={topBarStyle.button_group} onPress={()=>{this.props.setCurrentAppState(appState.MainPage)}}>
                     <RotatingImage style={topBarStyle.logo} source={require("@assets/lenia-icon.svg")}></RotatingImage>
                     {
                         !this.props.isWindowWidthSmall &&
                         <Image source={require("@assets/lenia-title.svg")} style={topBarStyle.title}></Image>
                     }
-                </View>
+                </Pressable>
                 <View style={topBarStyle.button_group_container}>
 
                     {RenderFunctionnalButtons(this)}
@@ -78,10 +80,25 @@ export default class TopBar extends Component<TopBarProps, TopBarState>{
 const RenderTopBarButtons = (topBar: TopBar) => {
     return (
         <React.Fragment>
-            <CustomButton onPress={() => { }} title={{text:"How to use"}}></CustomButton>
-            <CustomButton onPress={() => { }} title={{text:"About us"}}></CustomButton>
-            <CustomButton onPress={() => { }} title={{text:"Contact us"}}></CustomButton>
-            <CustomButton onPress={() => topBar.toggleSettingsModal()} title={{text:"Settings"}}></CustomButton>
+            <CustomButton onPress={() => {topBar.props.setCurrentAppState(appState.MainPage);
+                topBar.resetBarsToggle();
+            }} 
+               icon={{name:"house-user", type:"font-awesome-5"}}/>
+            <CustomButton onPress={() => {topBar.props.setCurrentAppState(appState.HowToUse);
+                topBar.resetBarsToggle();
+            }} 
+                title={{text:"How to use"}}/>
+            <CustomButton onPress={() => {topBar.props.setCurrentAppState(appState.AboutUs);
+                topBar.resetBarsToggle();
+             }} 
+                title={{text:"About us"}}/>
+            <CustomButton onPress={() => {topBar.props.setCurrentAppState(appState.ContactUs);
+                topBar.resetBarsToggle();
+             }} 
+                title={{text:"Contact us"}}/>
+            <CustomButton onPress={() => {topBar.toggleSettingsModal();
+                topBar.resetBarsToggle();
+            }} title={{text:"Settings"}}></CustomButton>
         </React.Fragment>
     );
 }
@@ -114,7 +131,7 @@ const topBarStyle = EStyleSheet.create({
     container: {
         width: "100%",
         position: "absolute",
-        height: 60,
+        height: "$TOPBAR_HEIGHT",
         zIndex: 1,
         paddingLeft: 30,
         paddingRight: 30,

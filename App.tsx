@@ -41,7 +41,7 @@ export default function App() {
 
     const windowInfo = useWindowDimensions();
     const [isWindowWidthSmall, setIsWindowWidthSmall] = useState(false);
-    const [currentAppState, setCurrentAppState] = useState(appState.HowToUse);
+    const [currentAppState, setCurrentAppState] = useState(appState.MainPage);
     const WINDOWSMALLSIZE = 780;
     
     useEffect(()=>{

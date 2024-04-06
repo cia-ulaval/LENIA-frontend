@@ -9,6 +9,7 @@ import AboutUs from "./src/components/SecondaryPages/aboutUs";
 import ContactUs from "./src/components/SecondaryPages/contactUs";
 import {appState} from "./src/components/Utilities/enumList";
 
+
 EStyleSheet.build({ 
     $bg_white: '#F7F7F7',
     $bg_black: '#000000',
@@ -23,7 +24,7 @@ EStyleSheet.build({
     $fg_color2_hover: "#737373",
 
     $fg_color3: "#ECECEC",
-
+  
     $special_red: "#CC0000",
     $special_red_hover: "#FF3333",
     $special_green: "#00CC00",

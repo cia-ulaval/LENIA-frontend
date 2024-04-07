@@ -28,7 +28,7 @@ export default function AboutUs(props: AboutUsProps) {
                         The CIA, or in french "Le Club d'Intelligence Artificielle de l'Université Laval", is a 
                         small organisation of passionnate students of IA in Laval University.
                         <br/><br/>
-                        We often dedicate our personnal to cool little projects like this one! Pretty cool :)
+                        We often dedicate our personnal time to cool little projects like this one! Pretty cool :)
                         <br/><br/>
                         For more informations, you can go check our official <a href="https://cia.ift.ulaval.ca/">website</a>
                     </Text>

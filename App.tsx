@@ -4,6 +4,10 @@ import TopBar from "./src/components/topBar";
 import RightPanel from "./src/components/rightPanel";
 import LeftPanel from "./src/components/leftPanel";
 import EStyleSheet from "react-native-extended-stylesheet";
+import HowToUse from "./src/components/SecondaryPages/howToUse";
+import AboutUs from "./src/components/SecondaryPages/aboutUs";
+import ContactUs from "./src/components/SecondaryPages/contactUs";
+import {appState} from "./src/components/Utilities/enumList";
 
 
 EStyleSheet.build({ 
@@ -20,12 +24,15 @@ EStyleSheet.build({
     $fg_color2_hover: "#737373",
 
     $fg_color3: "#ECECEC",
-
+  
     $special_red: "#CC0000",
     $special_red_hover: "#FF3333",
     $special_green: "#00CC00",
     $special_green_hover: "#33FF33",
+    $special_blue: "#0000CC",
+    $special_blue_hover: "#3333FF",
 
+    $TOPBAR_HEIGHT: 60,
     $MIN_SIZE: 400,
 });
 
@@ -34,6 +41,7 @@ export default function App() {
 
     const windowInfo = useWindowDimensions();
     const [isWindowWidthSmall, setIsWindowWidthSmall] = useState(false);
+    const [currentAppState, setCurrentAppState] = useState(appState.MainPage);
     const WINDOWSMALLSIZE = 780;
     
     useEffect(()=>{
@@ -43,12 +51,23 @@ export default function App() {
             setIsWindowWidthSmall(false);
     }, [windowInfo])
 
+    function mainPage(){
+        return(
+            <>
+                <LeftPanel isWindowWidthSmall={isWindowWidthSmall}/>
+                <RightPanel isWindowWidthSmall={isWindowWidthSmall}/>
+            </>
+        );
+    }
+
     return (
         <View style={appStyle.global}>
             <View style={isWindowWidthSmall ? appStyle.container_small_width : appStyle.container}>
-                <TopBar windowInfo={windowInfo} isWindowWidthSmall={isWindowWidthSmall}></TopBar>
-                <LeftPanel isWindowWidthSmall={isWindowWidthSmall}></LeftPanel>
-                <RightPanel isWindowWidthSmall={isWindowWidthSmall}></RightPanel>
+            <TopBar windowInfo={windowInfo} isWindowWidthSmall={isWindowWidthSmall} setCurrentAppState={setCurrentAppState}/>
+                {currentAppState==appState.MainPage && mainPage()}
+                {currentAppState==appState.HowToUse && <HowToUse isWindowWidthSmall={isWindowWidthSmall}/>}
+                {currentAppState==appState.AboutUs && <AboutUs isWindowWidthSmall={isWindowWidthSmall}/>}
+                {currentAppState==appState.ContactUs && <ContactUs isWindowWidthSmall={isWindowWidthSmall}/>}
             </View>
         </View>
     );
@@ -72,7 +91,7 @@ const appStyle = EStyleSheet.create({
         flexGrow: 1,
         minHeight : "$MIN_SIZE",
         maxWidth: 1600,
-  
+        
         backgroundColor: "$bg_color1",
     },
 
@@ -81,7 +100,7 @@ const appStyle = EStyleSheet.create({
         flexDirection : "column",
         backgroundColor: "$bg_color1",
         minWidth: "$MIN_SIZE",
-        minHeight : "$MIN_SIZE",
+        // minHeight : "$MIN_SIZE",
         width: "100%",
     }
     

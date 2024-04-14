@@ -25,8 +25,7 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
         
         super(props);
         this.state = {imageProp:[,,,], channel: 0};
-        fetchData();
-    }
+}
 
     async componentDidMount(){
         

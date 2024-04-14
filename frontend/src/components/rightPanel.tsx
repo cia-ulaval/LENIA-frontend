@@ -12,7 +12,7 @@ import CustomButton from "./Utilities/CustomButton";
 import * as DocumentPicker from 'expo-document-picker';
 import {Asset} from 'expo-asset';
 import {fetchData} from './reseau';
-import axios from 'axios'; //modife de jordan
+import axios from 'axios';
 
 
 interface RightPanelProps { isWindowWidthSmall: boolean }
@@ -45,7 +45,7 @@ export default class RightPanel extends Component<RightPanelProps, RightPanelSta
             this.setState({imageProp: oldImage});
         }
     }
-    //il faudrait ici creer ici une fonction avec axios pour envoyer l'image vers le backend
+
 
 
     OnChangeChannelState(e:FormEvent<HTMLSelectElement>){

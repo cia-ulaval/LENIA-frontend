@@ -7,6 +7,7 @@ import React from "react";
 import { Component } from "react";
 import { View } from "react-native";
 import EStyleSheet from "react-native-extended-stylesheet";
+import Viewport from "./viewport";
 
 
 interface LeftPanelProps{isWindowWidthSmall:boolean}
@@ -24,7 +25,7 @@ export default class LeftPanel extends Component<LeftPanelProps, LeftPanelState>
             <View style={this.props.isWindowWidthSmall ?
                                     leftPanelStyle.container_small_width
                                     : leftPanelStyle.container}>
-                
+                <Viewport/>
             </View>
         );
     }
